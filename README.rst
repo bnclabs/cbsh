@@ -1,7 +1,7 @@
 cbsh - couchbase shell.
 
 For basic command line interface there is couchbase-cli and associated
-scripts. This tool is intended users who end up interacting with couchbase
+scripts. This tool is intended for users who end up interacting with couchbase
 server more frequently, it is also intended for developers who create custom
 map-reduce functions a.k.a views.
 
@@ -26,15 +26,15 @@ phase. In case you are interested post me.
   - current context of server, bucket, design-doc will be highlighted in the
     prompt, like, ``myserver.com/mybybucket/ddoc>``.
   - doing ``../../../anotherserver.com``, will change context to
-    ``anotherserver.com/mybybucket/ddoc>``.
+    ``anotherserver.com>``.
   - doing ``../../../anotherserver.com/anotherbucket`` will change context to
-    ``anotherserver.com/anotherbucket/ddoc``.
+    ``anotherserver.com/anotherbucket>``.
 
-- tab-completion for javascript, slash-commands. tab completions can also be
+- tab-completion for javascript, slash-commands. tab completions can be
   extended for individual commands.
 - new commands can be added using extension APIs.
 - write scripts to monitor clusters and nodes, collect their statistics.
-- render the monitored stats as xml file, text tables or graphical images.
+- render the monitored stats as xml file, text tables or image graphs.
 - while developing map-reduce functions,
 
   - source design doc from local directory and load them into shell environment.
@@ -51,5 +51,6 @@ managed along with this source-base you don't need to install them again. This
 might change in future though.
 
 .. code-block:: bash
+
     npm install optimize underscore underscore.string colors
 
