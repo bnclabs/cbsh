@@ -2,29 +2,26 @@ var optimist = require('optimist');
 var restc = require('../restc');
 var _ = require('underscore');
 
-module.exports.command = 'bucket-list';
+module.exports.command = 'bucket-node-stats';
 
 module.exports.usage = function(args) {
     var opts = 
         optimist( args )
         .options( 'h', {
             alias : 'help',
-            describe : 'options for bucket-list command'
+            describe : 'options for bucket-node-stats command'
         })
         .usage(
-            'list all bucket in cluster\n' +
-            'Usage: $0 [OPTIONS] bucket-list [OPTIONS]'
+            'bucket node statistics in cluster\n' +
+            'Usage: $0 [OPTIONS] bucket-node-stats [OPTIONS]'
         );
     return opts
 }
 
 module.exports.run = function( cluster, options ) {
     var req = _.extend( {}, cluster )
-    restc.bucketList(
-        req, options,
-        function(json) { options.log(json); }
+    restc.bucketNodeStats(
+        req, options, function(json) { options.log(json); }
     );
 }
-
-
 

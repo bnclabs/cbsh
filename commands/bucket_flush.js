@@ -8,33 +8,11 @@ module.exports.usage = function(args) {
     var opts = 
         optimist( args )
         .options( 'bucket-name', {
+            default : undefined,
             describe : 'bucket to act on'
         })
-        .options( 'bucket-type', {
-            describe : 'TYPE, either memcached or couchbase'
-        })
-        .options( 'bucket-port', {
-            describe : 'standard port, exlusive with bucket-port'
-        })
-        .options( 'bucket-password', {
-            describe : 'support ASCII protocol and is auth-less'
-        })
-        .options( 'bucket-remsize', {
-            describe : 'bucket ram quota in MB'
-        })
-        .options( 'bucket-replica', {
-            describe : 'replication count for bucket'
-        })
-        .options( 'enable-flush', {
-            describe : 'enable or disable flush'
-        })
-        .options( 'enable-index-replica', {
-            describe : 'enable or disable index replicas'
-        })
-        .options( 'wait', {
-            describe : 'wait for bucket create to complete before returning'
-        })
         .options( 'force', {
+            default : false,
             describe : 'force to execute command without conformation'
         })
         .options( 'data-only', {
@@ -55,7 +33,13 @@ module.exports.usage = function(args) {
 }
 
 module.exports.run = function( cluster, options ) {
-    var req = _.extend( {}, cluster )
+    var req = _.extend( {}, cluster );
+    req.path = '/pools/default/buckets/' + options['bucket-name'] +
+               '/controller/doFlush';
+    restc.bucketFlush(
+        req, options,
+        function(res, data) { options.log( JSON.parse(data) ) }
+    );
 }
 
 

@@ -47,9 +47,9 @@ module.exports.run = function( cluster, options ) {
             req.port = port == 'SAME' ? req.port : Number(port);
             req.params.memoryQuota = options['cluster-ramsize'];
             req.method = 'POST';
-            restc.pools( req, options, function(res, data) {}, 'default' )
+            restc.pools( req, options, function(res, data) {}, 'default' );
         }
-    }
+    );
 }
 
 

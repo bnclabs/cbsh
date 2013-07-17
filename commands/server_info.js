@@ -26,8 +26,8 @@ module.exports.run = function( cluster, options ) {
     restc.nodes(
         req, options,
         function(res, data) {
-            var json = _.omit( JSON.parse(data), skipNames )
-            console.log( util.inspect(json, {colors:true, depth:null}) )
+            var json = _.omit( JSON.parse(data), skipNames );
+            options.log( util.inspect(json, {colors:true, depth:null}) )
         },
         'self'
     );

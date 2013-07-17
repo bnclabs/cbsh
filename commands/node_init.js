@@ -8,11 +8,11 @@ module.exports.usage = function(args) {
     var opts = 
         optimist( args )
         .options( 'data-path', {
-            default=undefined,
+            default : undefined,
             describe : 'PATH, per node path to store data'
         })
         .options( 'index-path', {
-            default=undefined,
+            default : undefined,
             describe : 'PATH, per node path to store index'
         })
         .options( 'h', {

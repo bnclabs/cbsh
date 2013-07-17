@@ -31,18 +31,6 @@ module.exports.usage = function(args) {
         .options( 'enable-index-replica', {
             describe : 'enable or disable index replicas'
         })
-        .options( 'wait', {
-            describe : 'wait for bucket create to complete before returning'
-        })
-        .options( 'force', {
-            describe : 'force to execute command without conformation'
-        })
-        .options( 'data-only', {
-            describe : 'compact database data only'
-        })
-        .options( 'view-only', {
-            describe : 'compact view data only'
-        })
         .options( 'h', {
             alias : 'help',
             describe : 'options for server-list command'
@@ -55,7 +43,39 @@ module.exports.usage = function(args) {
 }
 
 module.exports.run = function( cluster, options ) {
+    // validate parameters
+    if( opts.argv['bucket-name'] == 'default' ) {
+        if( opts.argv['bucket-port'] && opts.argv['bucket-port'] != "11211" ) {
+            throw "default bucket must be on port 11211."
+        }
+        if( opts.argv['bucket-password'] ) {
+            throw "default bucket should only have empty password."
+        }
+    } else if( opts.argv['bucket-name'] ) {
+        opts.argv['auth-type'] = 
+                opts.argv['bucket-port'] == "11211" ? 'sasl' : undefined;
+        if( opts.argv['auth-type'] && opts.argv['bucket-password'] ) {
+            throw "a sasl bucket is supported only on port 11211."
+        }
+    }
+
     var req = _.extend( {}, cluster )
+    req.params['name'] = options['bucket-name']
+    req.params['bucketType'] = options['bucket-type']
+    req.params['authType'] = options['auth-type']
+    req.params['proxyPort'] = options['bucket-port']
+    req.params['saslPassword'] = options['bucket-password']
+    req.params['ramQuotaMB'] = options['bucket-ramsize']
+    req.params['replicaNumber'] = options['bucket-replica']
+    req.params['flushEnabled'] = options['enable-flush']
+    req.params['replicaIndex'] = options['enable-index-replica']
+    _.each(
+      req, function(val, key) { if( val == undefined ) delete req.params[key]; }
+    )
+    restc.bucketEdit(
+        reqC, options,
+        function(res, data) { options.log( JSON.parse(data) ); }
+    );
 }
 
 

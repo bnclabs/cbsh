@@ -28,7 +28,7 @@ module.exports.usage = function(args) {
 module.exports.run = function( cluster, options ) {
     var req = _.extend( {}, cluster )
     timeout = Number(options['auto-failover-timeout']);
-    enable = Number(options['enable-auto-failover']
+    enable = Number(options['enable-auto-failover']);
     if( timeout < 30 ) {
         throw "ERROR: Timeout value must be larger than 30 second."
     } else {

@@ -8,39 +8,39 @@ module.exports.usage = function(args) {
     var opts = 
         optimist( args )
         .options( 'enable-email-alert', {
-            default : undefined;
+            default : undefined,
             describe : '0|1, allow email alert'
         })
         .options( 'email-recipients', {
-            default : undefined;
+            default : undefined,
             describe : 'comma separated list of email recipients'
         })
         .options( 'email-sender', {
-            default : undefined;
+            default : undefined,
             describe : 'sender email address'
         })
         .options( 'email-user', {
-            default : undefined;
+            default : undefined,
             describe : 'email server username'
         })
         .options( 'email-password', {
-            default : undefined;
+            default : undefined,
             describe : 'email server password'
         })
         .options( 'email-host', {
-            default : undefined;
+            default : undefined,
             describe : 'email server host'
         })
         .options( 'email-port', {
-            default : undefined;
+            default : undefined,
             describe : 'email server port'
         })
         .options( 'email-encrypt', {
-            default : undefined;
+            default : undefined,
             describe : '0|1, email encrypt'
         })
         .options( 'alert', {
-            default : undefined;
+            default : undefined,
             describe : 'comma separated list of tiggers, supported values are' +
                        'auto_failover_node, auto_failover_maximum_reached, ' +
                        'auto_failover_other_nodes_down, ' +

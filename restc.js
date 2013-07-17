@@ -15,6 +15,9 @@ var h = require('./h');
 //      To support url.parse() hostname is preferred over host
 //  port,
 //      Port of remote server. Defaults to 80.
+//  auth,
+//      Basic authentication i.e. 'user:password' to compute an Authorization
+//      header.
 //  localAddress,
 //      Local interface to bind for network connections.
 //  socketPath,
@@ -34,9 +37,6 @@ var h = require('./h');
 //      An object containing request headers.
 //  data,
 //      request data to be sent.
-//  auth,
-//      Basic authentication i.e. 'user:password' to compute an Authorization
-//      header.
 module.exports.request = function(req, options, callback) {
     var method = req.method;
     // Query and parameters;
@@ -49,10 +49,10 @@ module.exports.request = function(req, options, callback) {
     } else if( req.query ) {
         req.path = path + '?' + qs.stringify( req.query );
     }
-    var req = http.request(req, function(res) {
+    var htreq = http.request(req, function(res) {
         var st = res.statusCode;
         if( st === 401 ) {
-            throw 'please check your username (-u) and password (-p)'
+            throw 'please check your username (-u) and password (-p)'.error
         }
         if(! st in [200, 201, 202, 204, 302] ) {
             //log( 'ERROR: %s (%d) %s',
@@ -62,12 +62,12 @@ module.exports.request = function(req, options, callback) {
             callback ? callback(res, chunk) : null;
         });
     })
-    req.on('error', function(e) {
-        options.log('Problem with request : ' + e.message);
+    htreq.on('error', function(e) {
+        options.log('Problem requesting to %s: %s', h.hostp(req), e.message);
     });
-    if( req.data ) req.write( data );
-    req.end();
-    return req;
+    if( req.data ) htreq.write( data );
+    htreq.end();
+    return htreq;
 };
 
 module.exports.get = function( req, options, callback ) {
@@ -99,19 +99,39 @@ module.exports.postmany = function( reqs, options, onPost, endPost ) {
     _.map( reqs, function(option) {module.exports.post(options, localOnPost);})
 }
 
+module.exports.versions = function( req, options, callback ) {
+    req.path = '/versions';
+    module.exports.get(
+        req, options, 
+        function(res, data) {
+            callback ? callback( JSON.parse(data) ) : null ;
+        }
+    );
+}
+
+module.exports.pools = function( req, options, callback ) {
+    req.path = '/pools';
+    module.exports.get(
+        req, options, 
+        function(res, data) {
+            callback ? callback( JSON.parse(data) ) : null ;
+        }
+    );
+}
+
 // TODO: should this API accept the `bucket` argument ? Check with the REST
 // manual.
-module.exports.pools = function( req, options, callback, bucket ) {
-    bucket = bucket || 'default';
-    req.path = bucket ? '/pools/' + bucket : '/pools';
-    if( req.method == 'GET' ) {
-        module.exports.get(req, options, callback);
-    } else if ( req.method == 'POST' ) {
-        module.exports.post(req, options, callback);
-    } else {
-        module.exports.get(req, options, callback);
-    }
-};
+//module.exports.pools = function( req, options, callback, bucket ) {
+//    bucket = bucket || 'default';
+//    req.path = bucket ? '/pools/' + bucket : '/pools';
+//    if( req.method == 'GET' ) {
+//        module.exports.get(req, options, callback);
+//    } else if ( req.method == 'POST' ) {
+//        module.exports.post(req, options, callback);
+//    } else {
+//        module.exports.get(req, options, callback);
+//    }
+//};
 
 // TODO: should this API accept the `node` argument ? Check with the REST
 // manual.
@@ -189,6 +209,100 @@ module.exports.setAlert = function( req, options, callback ) {
     module.exports.post(
         req, options,
         function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+
+module.exports.bucketList = function( req, options, callback ) {
+    req.path = '/pools/default/buckets';
+    module.exports.get(
+        req, options,
+        function(res, data) {  callback ? callback(JSON.parse(data)) : null; }
+    );
+}
+
+module.exports.bucketGet = function( req, options, callback ) {
+    req.path = '/pools/default/buckets';
+    module.exports.get(
+        req, options,
+        function(res, data) {  callback ? callback(JSON.parse(data)) : null; }
+    );
+}
+
+module.exports.bucketFlush = function( req, options, callback ) {
+    module.exports.post(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+
+module.exports.bucketCreate = function( req, options, callback ) {
+    req.path = '/pools/default/buckets';
+    module.exports.post(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+
+module.exports.bucketEdit = function( req, options, callback ) {
+    req.path = '/pools/default/buckets';
+    module.exports.post(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+
+module.exports.bucketCreate = function( req, options, callback ) {
+    req.path = '/pools/default/buckets';
+    module.exports.post(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+
+module.exports.bucketDelete = function( req, options, callback ) {
+    req.path = '/pools/default/buckets';
+    module.exports.delete(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+
+module.exports.bucketStats = function( req, options, callback ) {
+    req.path = '/pools/default/buckets/%s/stats?zoom=hour';
+    module.exports.get(
+        req, options,
+        function(res, data) {  callback ? callback(JSON.parse(data)) : null; }
+    );
+}
+
+module.exports.bucketNodeStats = function( req, options, callback ) {
+    req.path = util.format( '/pools/default/buckets/%s/stats/%s?zoom=%s', 
+                            options.bucket_name, options.node_name );
+    module.exports.get(
+        req, options,
+        function(res, data) {  callback ? callback(JSON.parse(data)) : null; }
+    );
+}
+module.exports.bucketInfo = function( req, options, callback ) {
+    req.path = '/pools/default/buckets/' + options['bucket-name']
+    module.exports.get(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+module.exports.bucketCompact = function( req, options, callback ) {
+    req.path = '/pools/default/buckets/',
+    module.exports.post(
+        req, options,
+        function(res, data) {  callback ? callback(res, data) : null; }
+    );
+}
+module.exports.bucketDDocs = function( req, options, callback ) {
+    req.path = util.format( '/pools/default/buckets/%s/ddocs',
+                            options.bucket_name )
+    module.exports.get(
+        req, options,
+        function(res, data) {  callback ? callback(JSON.parse(data)) : null; }
     );
 }
 
