@@ -1,779 +1,0 @@
-let SessionLoad = 1
-if &cp | set nocp | endif
-let s:cpo_save=&cpo
-set cpo&vim
-cnoremap <C-$> <End>
-nmap  :grep =expand('<cword>') :cwindow
-nmap i :cs find i ^=expand("<cfile>")$
-nmap f :cs find f =expand("<cfile>")
-nmap e :cs find e =expand("<cword>")
-nmap t :cs find t =expand("<cword>")
-nmap d :cs find d =expand("<cword>")
-nmap c :cs find c =expand("<cword>")
-nmap g :cs find g =expand("<cword>")
-nmap s :cs find s =expand("<cword>")
-nmap d :cs find d =expand("<cword>")	
-nmap i :cs find i ^=expand("<cfile>")$
-nmap f :cs find f =expand("<cfile>")	
-nmap e :cs find e =expand("<cword>")	
-nmap t :cs find t =expand("<cword>")	
-nmap c :cs find c =expand("<cword>")	
-nmap g :cs find g =expand("<cword>")	
-nmap s :cs find s =expand("<cword>")	
-cnoremap æ <S-Right>
-cnoremap â <S-Left>
-map Q gq
-map Y y$
-vmap \ev <Plug>Spchkev
-nmap \ec <Plug>LoadSpchk
-map \rwp <Plug>RestoreWinPosn
-map \swp <Plug>SaveWinPosn
-nmap \caL <Plug>CalendarH
-nmap \cal <Plug>CalendarV
-vmap <silent> \Htd :<BS><BS><BS>ma'>\Htd
-vmap <silent> \tt :<BS><BS><BS>ma'>\tt
-vmap <silent> \tp@ :<BS><BS><BS>ma'>\tp@
-vmap <silent> \tsq :<BS><BS><BS>ma'>\tsq
-vmap <silent> \tsp :<BS><BS><BS>ma'>\tsp
-vmap <silent> \tml :<BS><BS><BS>ma'>\tml
-vmap <silent> \tab :<BS><BS><BS>ma'>\tab
-vmap <silent> \t@ :<BS><BS><BS>ma'>\t@
-vmap <silent> \t? :<BS><BS><BS>ma'>\t?
-vmap <silent> \t= :<BS><BS><BS>ma'>\t=
-vmap <silent> \t< :<BS><BS><BS>ma'>\t<
-vmap <silent> \t; :<BS><BS><BS>ma'>\t;
-vmap <silent> \t: :<BS><BS><BS>ma'>\t:
-vmap <silent> \ts, :<BS><BS><BS>ma'>\ts,
-vmap <silent> \t, :<BS><BS><BS>ma'>\t,
-vmap <silent> \t| :<BS><BS><BS>ma'>\t|
-vmap <silent> \anum :<BS><BS><BS>ma'>\anum
-vmap <silent> \afnc :<BS><BS><BS>ma'>\afnc
-vmap <silent> \adef :<BS><BS><BS>ma'>\adef
-vmap <silent> \adec :<BS><BS><BS>ma'>\adec
-vmap <silent> \ascom :<BS><BS><BS>ma'>\ascom
-vmap <silent> \aocom :<BS><BS><BS>ma'>\aocom
-vmap <silent> \acom :<BS><BS><BS>ma'>\acom
-vmap <silent> \abox :<BS><BS><BS>ma'>\abox
-vmap <silent> \a= :<BS><BS><BS>ma'>\a=
-vmap <silent> \a< :<BS><BS><BS>ma'>\a<
-vmap <silent> \a, :<BS><BS><BS>ma'>\a,
-vmap <silent> \a? :<BS><BS><BS>ma'>\a?
-vmap <silent> \Tsp :<BS><BS><BS>ma'>\Tsp
-vmap <silent> \T@ :<BS><BS><BS>ma'>\T@
-vmap <silent> \T= :<BS><BS><BS>ma'>\T=
-vmap <silent> \T< :<BS><BS><BS>ma'>\T<
-vmap <silent> \T: :<BS><BS><BS>ma'>\T:
-vmap <silent> \Ts, :<BS><BS><BS>ma'>\Ts,
-vmap <silent> \T, :<BS><BS><BS>ma'>\T,
-vmap <silent> \T| :<BS><BS><BS>ma'>\T|
-map <silent> \tdW@ :AlignCtrl v ^\s*/[/*]:AlignCtrl mWp1P1=l @:'a,.Align
-map <silent> \tW@ :AlignCtrl mWp1P1=l @:'a,.Align
-nmap <silent> \t@ :AlignCtrl mIp1P1=l @:'a,.Align
-omap <silent> \t@ :AlignCtrl mIp1P1=l @:'a,.Align
-nmap <silent> \aocom :AlignPush:AlignCtrl g /[*/]\acom:AlignPop
-omap <silent> \aocom :AlignPush:AlignCtrl g /[*/]\acom:AlignPop
-nmap \rfc :tabnew $HOME/dev/rfc/rfc.txt 
-map \gdi :!sdcv --data-dir ~/.startdict "" 
-map \di :!sdcv --data-dir ~/.startdict "" 
-map \gfi :!find ./ -name "**" 
-map \fi :!find ./ -name "" 
-map \w :!chromium-browser  
-map \n :set nowrap 
-map \r :syn off :syn on 
-nmap gx <Plug>NetrwBrowseX
-vnoremap p :let current_reg = @"gvs=current_reg
-nmap td :tabclose
-nmap t% :tabedit %
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
-nmap <Nul><Nul>d :vert scs find d =expand("<cword>")
-nmap <Nul><Nul>i :vert scs find i ^=expand("<cfile>")$	
-nmap <Nul><Nul>f :vert scs find f =expand("<cfile>")	
-nmap <Nul><Nul>e :vert scs find e =expand("<cword>")
-nmap <Nul><Nul>t :vert scs find t =expand("<cword>")
-nmap <Nul><Nul>c :vert scs find c =expand("<cword>")
-nmap <Nul><Nul>g :vert scs find g =expand("<cword>")
-nmap <Nul><Nul>s :vert scs find s =expand("<cword>")
-nmap <Nul>d :scs find d =expand("<cword>")	
-nmap <Nul>i :scs find i ^=expand("<cfile>")$	
-nmap <Nul>f :scs find f =expand("<cfile>")	
-nmap <Nul>e :scs find e =expand("<cword>")	
-nmap <Nul>t :scs find t =expand("<cword>")	
-nmap <Nul>c :scs find c =expand("<cword>")	
-nmap <Nul>g :scs find g =expand("<cword>")	
-nmap <Nul>s :scs find s =expand("<cword>")	
-nmap <silent> <Plug>RestoreWinPosn :call RestoreWinPosn()
-nmap <silent> <Plug>SaveWinPosn :call SaveWinPosn()
-nmap <silent> <Plug>CalendarH :cal Calendar(1)
-nmap <silent> <Plug>CalendarV :cal Calendar(0)
-nmap <SNR>22_WE <Plug>AlignMapsWrapperEnd
-nmap <SNR>22_WS <Plug>AlignMapsWrapperStart
-nmap <C-Space><C-Space>d:vert scs find d =expand("<cword>")
-nmap <C-Space><C-Space>i:vert scs find i ^=expand("<cfile>")$
-nmap <C-Space><C-Space>e:vert scs find e =expand("<cword>")
-nmap <C-Space><C-Space>t:vert scs find t =expand("<cword>")
-nmap <C-Space><C-Space>c:vert scs find c =expand("<cword>")
-nmap <C-Space><C-Space>g:vert scs find g =expand("<cword>")
-nmap <C-Space><C-Space>s:vert scs find s =expand("<cword>")
-nmap <C-Space>i :scs find i ^=expand("<cfile>")$
-nmap <C-Space>f :scs find f =expand("<cfile>")
-nmap <C-Space>e :scs find e =expand("<cword>")
-nmap <C-Space>t :scs find t =expand("<cword>")
-nmap <C-Space>d :scs find d =expand("<cword>")
-nmap <C-Space>c :scs find c =expand("<cword>")
-nmap <C-Space>g :scs find g =expand("<cword>")
-nmap <C-Space>s :scs find s =expand("<cword>")
-nnoremap <silent> <F8> :Tlist
-cnoremap  <Left>
-cnoremap <NL> <Down>
-imap <NL> <NL>
-cnoremap  <Up>
-imap  
-cnoremap  <Right>
-cnoremap  <Home>
-map   
-let &cpo=s:cpo_save
-unlet s:cpo_save
-set autoindent
-set autowrite
-set backspace=indent,eol,start
-set backupext=.bak
-set cindent
-set cscopepathcomp=4
-set cscopetag
-set cscopeverbose
-set expandtab
-set fileencodings=ucs-bom,utf-8,latin1
-set grepprg=grep\ -Hn\ $*\ -R\ *
-set guifont=inconsolata
-set guioptions=mrb
-set helplang=en
-set history=50
-set hlsearch
-set incsearch
-set keymodel=startsel,stopsel
-set mousemodel=popup
-set printoptions=paper:a4
-set ruler
-set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim73,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
-set scrolloff=3
-set selection=exclusive
-set selectmode=mouse,key
-set shiftwidth=4
-set showcmd
-set showmatch
-set smartcase
-set statusline=%<%f%=\ [%1*%M%*%n%R%H]\ %-19(%3l,%02c%03V%)%O'%02b'
-set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
-set tabstop=4
-set termencoding=utf-8
-set textwidth=78
-set wildmenu
-set winminheight=0
-let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
-let v:this_session=expand("<sfile>:p")
-silent only
-cd ~/0cb/cli
-if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
-  let s:wipebuf = bufnr('%')
-endif
-set shortmess=aoO
-badd +32 h.js
-badd +12 usage.js
-badd +99 restc.js
-badd +28 ~/.tmux.conf
-badd +24 commands/host_list.js
-badd +85 cbcd.js
-badd +26 commands/server_list.js
-badd +29 commands/server_info.js
-badd +29 commands/server_eshell.js
-badd +1 commands/failover.js
-args cli.js
-edit cbcd.js
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winheight=1 winwidth=1
-argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=j1,J1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=78
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 42 - ((11 * winheight(0) + 16) / 32)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-42
-normal! 07l
-tabedit commands/failover.js
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winheight=1 winwidth=1
-argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=j1,J1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=78
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 3 - ((2 * winheight(0) + 16) / 32)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-3
-normal! 09l
-tabedit restc.js
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winheight=1 winwidth=1
-argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=j1,J1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=78
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 126 - ((14 * winheight(0) + 16) / 32)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-126
-normal! 05l
-tabedit commands/server_list.js
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winheight=1 winwidth=1
-argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=j1,J1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=78
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 28 - ((14 * winheight(0) + 16) / 32)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-28
-normal! 037l
-tabedit h.js
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winheight=1 winwidth=1
-argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=j1,J1
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://
-setlocal commentstring=//%s
-setlocal complete=.,w,b,u,t,i
-setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal nocursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'javascript'
-setlocal filetype=javascript
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=croql
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=javascriptcomplete#CompleteJS
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norelativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal nosmartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'javascript'
-setlocal syntax=javascript
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=78
-setlocal thesaurus=
-setlocal noundofile
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 35 - ((27 * winheight(0) + 16) / 32)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-35
-normal! 0
-tabnext 3
-if exists('s:wipebuf')
-  silent exe 'bwipe ' . s:wipebuf
-endif
-unlet! s:wipebuf
-set winheight=1 winwidth=20 shortmess=filnxtToO
-let s:sx = expand("<sfile>:p:r")."x.vim"
-if file_readable(s:sx)
-  exe "source " . fnameescape(s:sx)
-endif
-let &so = s:so_save | let &siso = s:siso_save
-doautoall SessionLoadPost
-unlet SessionLoad
-" vim: set ft=vim :
